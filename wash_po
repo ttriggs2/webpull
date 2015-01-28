@@ -1,0 +1,29 @@
+########### Python 2.7 ############# 
+import httplib, urllib, base64 
+  
+headers = { 
+    # Basic Authorization Sample 
+    # 'Authorization': 'Basic %s' % base64.encodestring('{username}:{password}'), 
+} 
+  
+params = urllib.urlencode({ 
+    # Specify your developer key 
+    'key': '', 
+    # Specify values for optional parameters, as needed 
+    #'include_variants': '', 
+    #'callback': '', 
+}) 
+  
+try: 
+    conn = httplib.HTTPConnection('api.washingtonpost.com') 
+    # Specify values for path parameters (shown as {...}) and request body if needed 
+    conn.request("GET", "/trove/v1/resources/{id}?%s" % params, "", headers) 
+    response = conn.getresponse() 
+    data = response.read() 
+    print(data) 
+    conn.close() 
+except Exception as e: 
+    print("[Errno {0}] {1}".format(e.errno, e.strerror)) 
+  
+#################################### 
+ 
